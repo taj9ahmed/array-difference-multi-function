@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    
+  </head>
+
+  <body>
+    <h1>two arrays difference</h1>
+
+    <script type="text/javascript" charset="utf-8">
+    let arr1 = [1, 2, 3];//['b','c','d'];//,
+    let arr2 = [100, 2, 1, 10];//['y','c','b','o'];//;
+         
+    function flatten( arr ) {
+      
+      let result = [];
+      for ( let i = 0; i < arr.length;  i++) {
+          if( Array.isArray( arr[i] ) ) 
+          {
+            flatten(arr[i]);
+          } else {
+            result = result.concat(arr[i]);
+        }
+      }
+      return result;
+    } 
+    
+    function occurences( arr ) {
+        let occureneces = new Array(arr.length).fill(1);
+        // console.log(occureneces);
+        for(let i = 0; i < arr.length; i++)
+        {
+          let temp = arr[i];
+          for(let j = i + 1; j< arr.length; j++)
+          {
+            if( temp == arr[j] )
+            {
+              occureneces[i]++;
+            }
+          }
+        }  
+        return occureneces;
+    }
+    
+    function remove_repeated_elements (arr) {
+      
+      let occur = [];
+     occur = occurences(arr);
+     let result = [];
+
+     for (let i = 0; i < arr.length; /*i++ */) 
+     { 
+          // if an element is present in the array more than once
+       if ( ( occur[i] > 1 )  ) 
+       {
+           let target = arr[i];
+           let occ_trgt = occur[i];
+            {
+              for (let j = 0; j < occ_trgt; j++ ) 
+            {
+              arr[arr.lastIndexOf(target)] = undefined; //"deeleted iteem";
+            }
+          }    
+        }
+        if(arr.lastIndexOf(arr[i+1]) > 0 ) i++;
+      }
+        for (let i = ( arr.length - 1); i > 0 ; i-- ) { 
+          if(arr[i] !== undefined ) {
+            result.push(arr[i]);
+          }
+        }
+        return result; 
+      } 
+    
+    function difference ( arr1, arr2) {
+      
+      let result = [];
+      
+      arr1 = flatten(arr1);
+      arr2 = flatten(arr2);
+      result = arr1.concat(arr2);
+     
+    //REMOVE REPEATED ELEMENTS
+      result = remove_repeated_elements(result);
+      return result;
+  }
+      console.log(difference(arr1, arr2)); 
+      //result >>> ["3", "10", "100"]
+    </script>
+  </body>
+
+</html>
